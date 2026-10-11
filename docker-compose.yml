@@ -64,8 +64,24 @@ services:
     networks:
       - lab-network
 
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: lab-portainer
+    command: -H unix:///var/run/docker.sock
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_lab_data:/data
+    networks:
+      - lab-network
+
 volumes:
   es_lab_data:
+  portainer_lab_data:
 
 networks:
   lab-network:
