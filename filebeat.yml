@@ -1,0 +1,17 @@
+filebeat.inputs:
+  - type: container
+    paths:
+      - /var/lib/docker/containers/*/*.log
+
+setup.kibana:
+  host: "http://kibana:5601"
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch:9200"]
+
+processors:
+  - add_docker_metadata: ~
+  - drop_event:
+      when:
+        contains:
+          message: "token query parameter"
