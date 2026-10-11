@@ -4,6 +4,7 @@ A lightweight local ELK (Elasticsearch, Logstash, Kibana) + Filebeat lab stack, 
 
 ## Components
 
+- **Consul** (`1.19`) — service discovery agent, exposed on port `8500` (UI) and `8600/udp`. Joins the external `lab-network` Docker network so other local projects can reach it.
 - **Elasticsearch** (`8.15.0`) — single-node instance, RAM capped at 512MB, exposed on port `9200`. Security (`xpack.security`) is disabled for local testing.
 - **Kibana** (`8.15.0`) — web UI for exploring data, exposed on port `5601`.
 - **Logstash** (`8.15.0`) — receives JSON log lines over TCP on port `5000` and forwards them to Elasticsearch, indexed as `logstash-YYYY.MM.dd`. Pipeline config: [logstash.conf](./logstash.conf).
